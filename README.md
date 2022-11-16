@@ -2,4 +2,4 @@
 
 ## Start
 
-`npm run dev` to start auto-reloading express server for development
+`npm run dev` to start auto-rebuilding express server for development
