@@ -6,6 +6,6 @@
         "NODE_ENV": "development"
     },
     "execMap": {
-        "js": "npm start"
+        "js": "webpack build"
     }
 }

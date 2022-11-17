@@ -12,6 +12,5 @@ export default function pendelumSketch(s) {
 
     s.draw = () => {
         s.background(10);
-        
     }
 }
