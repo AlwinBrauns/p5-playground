@@ -2,11 +2,19 @@ import { canvasHeight, canvasWidth, fps } from "../constants";
 
 export default function randomSketch(s) {
     let graphic;
+    const walkSize = 50000
+    const changeOnSecond = 5
 
     class Walker {
         constructor(canvasWidth, canvasHeight) {
-            this.x = canvasWidth / 2;
-            this.y = canvasHeight / 2;
+            this.width = canvasWidth;
+            this.height = canvasHeight;
+            this.initial();
+        }
+        initial() {
+            this.points = [];
+            this.x = this.width  / 2;
+            this.y = this.height  / 2;
         }
         display() {
             graphic.stroke(255)
@@ -49,11 +57,19 @@ export default function randomSketch(s) {
         graphic = s.createGraphics(canvasWidth, canvasHeight)
         s.frameRate(fps);
         s.background(10);
-        walker.make(50000);
+        walker.make(walkSize);
         walker.display();
     }
 
     s.draw = () => {
+        if((s.frameCount % (fps*changeOnSecond)) === 0){
+            s.clear();
+            graphic.clear();
+            s.background(10);
+            walker.initial();
+            walker.make(walkSize);
+            walker.display();
+        }
         s.image(graphic, 0, 0)
     }
 }
