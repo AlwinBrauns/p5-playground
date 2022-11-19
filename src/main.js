@@ -6,17 +6,38 @@ import randomSketch from "./randomSketch/randomSketch";
 
 let sketchInstance;
 
-function switchSketch(sketch) {
+function switchSketch(sketch, view) {
     try {
+        let url = new URL(window.location.origin)
+        url.searchParams.set("view",view)
+        window.history.replaceState(null,null,url.search)
         sketchInstance?.remove();
         sketchInstance = new p5(sketch);
     }catch(e) { console.log(e) }
 }
 
-switchSketch(null)
 
-document.getElementById("btnStars").addEventListener("click", () => switchSketch(starSketch))
-document.getElementById("btnPendelum").addEventListener("click", () => switchSketch(pendelumSketch))
-document.getElementById("btnRandom").addEventListener("click", () => switchSketch(randomSketch))
-document.getElementById("btnNull").addEventListener("click", () => switchSketch(null))
+const switchSketchMap = {
+    null: () => switchSketch(null, "null"),
+    stars: () => switchSketch(starSketch, "stars"),
+    pendelum: () => switchSketch(pendelumSketch, "pendelum"),
+    random: () => switchSketch(randomSketch, "random"),
+}
+
+function onLoad() {
+    const url = new URL(window.location.toString())
+    const view = url.searchParams.get("view")
+    if(view) {
+        switchSketchMap[view]()
+    }else {
+        switchSketchMap.null()
+    }
+}
+
+onLoad();
+
+document.getElementById("btnStars").addEventListener("click", () => switchSketchMap.stars())
+document.getElementById("btnPendelum").addEventListener("click", () => switchSketchMap.pendelum())
+document.getElementById("btnRandom").addEventListener("click", () =>  switchSketchMap.random())
+document.getElementById("btnNull").addEventListener("click", () =>  switchSketchMap.null())
 
