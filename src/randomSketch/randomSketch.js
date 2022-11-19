@@ -3,13 +3,24 @@ import { canvasHeight, canvasWidth, fps } from "../constants";
 export default function randomSketch(s) {
 
     class Walker {
+        once = true;
         constructor(canvasWidth, canvasHeight) {
             this.x = canvasWidth / 2;
             this.y = canvasHeight / 2;
         }
         display() {
             s.stroke(255)
-            s.point(this.x, this.y)
+            for (let i = 0; i < this.points.length; i++) {
+                const p = this.points[i];
+                s.point(p.x, p.y)
+            }
+        }
+        make(size) {
+            this.points = []
+            for(let i = 0; i<size;i++) {
+                this.points.push({x: this.x, y: this.y})
+                this.step()
+            }
         }
         step() {
             const possibleChoices = 4;
@@ -36,11 +47,11 @@ export default function randomSketch(s) {
     s.setup = () => {
         s.createCanvas(canvasWidth, canvasHeight).parent("p5");
         s.frameRate(fps); 
+        walker.make(500);
     }
 
     s.draw = () => {
         s.background(10);
         walker.display();
-        walker.step();
     }
 }
