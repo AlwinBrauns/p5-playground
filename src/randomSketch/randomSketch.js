@@ -1,9 +1,11 @@
+import p5 from "p5";
 import { canvasHeight, canvasWidth, fps } from "../constants";
 
 export default function randomSketch(s) {
     let graphic;
-    const walkSize = 50000
+    const walkSize = 5000
     const changeOnSecond = 5
+    const smallerWindowAxse =  Math.min(canvasHeight, canvasWidth)
 
     class Walker {
         constructor(canvasWidth, canvasHeight) {
@@ -76,17 +78,21 @@ export default function randomSketch(s) {
 
     const walker = new Walker(canvasWidth, canvasHeight);
     const step = () => {
-        walker.stepPercentage((s.mouseX/canvasWidth), 1-(s.mouseY/canvasHeight))
+        let centerVector = s.createVector(canvasWidth/2, canvasHeight/2)
+        let mouseVector = s.createVector(s.mouseX, s.mouseY)
+        let difVector = p5.Vector.sub(centerVector, mouseVector)
+        walker.stepPercentage(
+            Math.max(0, Math.min(1,(0.5-difVector.x/smallerWindowAxse))), 
+            Math.max(0, Math.min(1,1-(0.5-difVector.y/smallerWindowAxse)))
+        )
     }
     s.setup = () => {
         s.createCanvas(canvasWidth, canvasHeight).parent("p5");
         graphic = s.createGraphics(canvasWidth, canvasHeight)
         s.frameRate(fps);
-        s.background(10);
         walker.make(walkSize, step);
         walker.display();
     }
-
     s.draw = () => {
         if((s.frameCount % (fps*changeOnSecond)) === 0){
             graphic.clear();
@@ -95,6 +101,30 @@ export default function randomSketch(s) {
             walker.make(walkSize, step);
             walker.display();
         }
+        s.background(10);
+
+        
+        s.noFill()
+        s.stroke(255)
+        s.strokeWeight(1)
+        s.ellipse(canvasWidth/2, canvasHeight/2, smallerWindowAxse, smallerWindowAxse)
+
+
+        let centerVector = s.createVector(canvasWidth/2, canvasHeight/2)
+        let mouseVector = s.createVector(s.mouseX, s.mouseY)
+        let difVector = p5.Vector.sub(centerVector, mouseVector)
+        s.line(centerVector.x, centerVector.y, mouseVector.x, mouseVector.y)
+        s.ellipse(mouseVector.x, mouseVector.y, 100,100)
+        s.fill(255,255,255)
+        s.text("Vector (Center/\\Mouse): " + difVector.x + " - " + difVector.y, 0, 14)
+        s.text(
+            "P: " + Math.max(0, Math.min(1,(0.5-difVector.x/smallerWindowAxse))) 
+            + " - " 
+            +  Math.max(0, Math.min(1,1-(0.5-difVector.y/smallerWindowAxse)))
+            , 0, 28
+            )
+
         s.image(graphic, 0, 0)
+
     }
 }
