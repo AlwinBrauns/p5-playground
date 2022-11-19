@@ -1,9 +1,7 @@
 import p5 from "p5";
+import { canvasHeight, canvasWidth, fps } from "../constants";
 
 export default function starSketch(s) {
-  const fps = 60;
-  const canvasHeight = window.innerHeight;
-  const canvasWidth = window.innerWidth;
   const stars = [];
   const fillUpStars = () => {
     for (let i = 0; i < 1000; i++) {
@@ -30,8 +28,8 @@ export default function starSketch(s) {
         if( (difx < 100 && dify < 100) &&  (difx > 3*star.mass && dify > 3*star.mass) ) {
           const dv = p5.Vector.sub(star.vector, influencer.vector);
           dv.normalize()
-          star.direction_vector.x = (star.direction_vector.x -= ((dv.x * influencer.mass)*0.19) / (difx<1?1:difx*Math.E))
-          star.direction_vector.y = (star.direction_vector.y -= ((dv.y * influencer.mass)*0.19) / (dify<1?1:dify*Math.E))
+          star.direction_vector.x = (star.direction_vector.x -= ((dv.x * influencer.mass)*0.01) / (difx<1?1:difx*Math.E))
+          star.direction_vector.y = (star.direction_vector.y -= ((dv.y * influencer.mass)*0.01) / (dify<1?1:dify*Math.E))
 
           //star.direction_vector.normalize()
         }

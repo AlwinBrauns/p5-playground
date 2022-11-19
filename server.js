@@ -23,6 +23,11 @@ io.on("connection", (socket) => {
   fs.watchFile(path.join(__dirname, 'public/bundle.js'), (curr, prev) => {
     console.log("restart emit")
     socket.emit('restart')
+    socket.disconnect(true)
+  })
+  socket.on("disconnect", () => {
+    fs.unwatchFile(path.join(__dirname, 'public/bundle.js'))
+    console.log("disconnect")
   })
 })
 
