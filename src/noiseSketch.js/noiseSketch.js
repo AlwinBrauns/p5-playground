@@ -3,12 +3,10 @@ import { canvasHeight, canvasWidth, fps } from "../constants";
 export default function noiseSketch(s) {
     let xoff = 0.01;
     let noiseX = 0;
-    let slider;
 
     s.setup = () => {
         s.createCanvas(canvasWidth, canvasHeight).parent("p5");
         s.frameRate(fps);
-        slider = s.createSlider(0, 255, 0, 1).parent("p5")
     }
 
     s.draw = () => {
