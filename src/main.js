@@ -4,6 +4,7 @@ import pendelumSketch from "./pendelumSketch/pendelumSketch"
 import starSketch from "./starSketch/starSketch"
 import randomSketch from "./randomSketch/randomSketch";
 import myNameSketch from "./myNameSketch/myNameSketch";
+import noiseSketch from "./noiseSketch.js/noiseSketch";
 
 let sketchInstance;
 
@@ -23,6 +24,7 @@ const switchSketchMap = {
     stars: () => switchSketch(starSketch, "stars"),
     pendelum: () => switchSketch(pendelumSketch, "pendelum"),
     random: () => switchSketch(randomSketch, "random"),
+    noise: () => switchSketch(noiseSketch, "noise"),
     myName: () => switchSketch(myNameSketch, "myName"),
 }
 
@@ -41,6 +43,7 @@ onLoad();
 document.getElementById("btnStars").addEventListener("click", () => switchSketchMap.stars())
 document.getElementById("btnPendelum").addEventListener("click", () => switchSketchMap.pendelum())
 document.getElementById("btnRandom").addEventListener("click", () =>  switchSketchMap.random())
+document.getElementById("btnNoise").addEventListener("click", () =>  switchSketchMap.noise())
 document.getElementById("btnMyName").addEventListener("click", () =>  switchSketchMap.myName())
 document.getElementById("btnNull").addEventListener("click", () =>  switchSketchMap.null())
 
