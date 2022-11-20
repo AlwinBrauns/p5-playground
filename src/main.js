@@ -47,3 +47,19 @@ document.getElementById("btnNoise").addEventListener("click", () =>  switchSketc
 document.getElementById("btnMyName").addEventListener("click", () =>  switchSketchMap.myName())
 document.getElementById("btnNull").addEventListener("click", () =>  switchSketchMap.null())
 
+const dragger = document.querySelector(".dragger")
+const header = document.getElementsByTagName("header")[0]
+let offsetX
+let offsetY
+dragger.addEventListener("dragstart", (event) => {
+    offsetX = event.offsetX + event.target.clientWidth;
+    offsetY = event.offsetY + event.target.clientHeight;
+    console.dir(event)
+})
+dragger.addEventListener("drag", (event) => {
+    if(event.y>0) {
+        header.style.right = undefined;
+        header.style.top = event.y+offsetY + "px";
+        header.style.left = event.x-offsetX + "px";
+    }
+})

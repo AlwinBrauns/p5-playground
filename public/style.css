@@ -16,6 +16,7 @@ header {
   grid-template-columns: 1fr 1fr;
 
   right: 0;
+  width: fit-content;
   background-color: rgba(100, 200, 255, 0.5);
   padding: 2rem;
 }
