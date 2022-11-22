@@ -1,5 +1,7 @@
 # p5-playground
 
+![image](https://user-images.githubusercontent.com/63373755/203430473-0d8295b7-b856-4d5a-bc0b-6ba49d6b214a.png)
+
 ## Start
 > you need to run both commands
 
