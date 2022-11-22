@@ -49,17 +49,12 @@ document.getElementById("btnNull").addEventListener("click", () =>  switchSketch
 
 const dragger = document.querySelector(".dragger")
 const header = document.getElementsByTagName("header")[0]
-let offsetX
-let offsetY
 dragger.addEventListener("dragstart", (event) => {
-    offsetX = event.offsetX + event.target.clientWidth;
-    offsetY = event.offsetY + event.target.clientHeight;
-    console.dir(event)
+    event.dataTransfer.setDragImage(new Image(), 0,0)
 })
 dragger.addEventListener("drag", (event) => {
     if(event.y>0) {
-        header.style.right = undefined;
-        header.style.top = event.y+offsetY + "px";
-        header.style.left = event.x-offsetX + "px";
+        header.style.left = event.clientX - event.target.clientWidth + "px";
+        header.style.top = event.clientY - event.target.offsetTop - event.target.clientHeight/2 + "px";
     }
 })
