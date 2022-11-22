@@ -71,8 +71,8 @@ header {
 }
 #drop-top header{
   position: relative;
-  display: inline;
-  height: 15%;
+  display: flex;
+  min-height: 15%;
   width: 100%;
   right: 0;
 }
@@ -87,8 +87,8 @@ header {
 }
 #drop-bottom header{
   position: relative;
-  display: inline;
-  height: 15%;
+  display: flex;
+  min-height: 15%;
   width: 100%;
   right: 0;
 }
