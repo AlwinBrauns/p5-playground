@@ -10,16 +10,89 @@
   opacity: 1;
   z-index: -1;
 }
+
+#move-area {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 10;
+  pointer-events: none;
+}
 header {
   position: fixed;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-
+  grid-template-columns: 1fr;
+  z-index: 12;
+  pointer-events: all;
   right: 0;
-  width: fit-content;
+
+  width: max-content;
   background-color: rgba(100, 200, 255, 0.5);
   padding: 2rem;
 }
+#drop-left {
+  position: fixed;
+  pointer-events: none;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 15%;
+  z-index: 12;
+}
+#drop-left header{
+  position: relative;
+  height: 100%;
+  left: 0;
+}
+#drop-right {
+  position: fixed;
+  pointer-events: none;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 15%;
+  z-index: 12;
+}
+#drop-right header{
+  position: relative;
+  height: 100%;
+  right: 0;
+}
+#drop-top {
+  position: fixed;
+  pointer-events: none;
+  top: 0;
+  right: 0;
+  height: 15%;
+  width: 100%;
+  z-index: 12;
+}
+#drop-top header{
+  position: relative;
+  display: inline;
+  height: 15%;
+  width: 100%;
+  right: 0;
+}
+#drop-bottom {
+  position: fixed;
+  pointer-events: none;
+  bottom: 0;
+  right: 0;
+  height: 15%;
+  width: 100%;
+  z-index: 12;
+}
+#drop-bottom header{
+  position: relative;
+  display: inline;
+  height: 15%;
+  width: 100%;
+  right: 0;
+}
+
 
 button {
   padding: 0.75rem;
@@ -48,9 +121,6 @@ button:hover {
   justify-self: center;
   height: 9px;
   width: 50%;
-}
-.dragger:hover {
-  cursor: pointer;
 }
 .dragger span {
   position: absolute;

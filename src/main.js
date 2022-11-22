@@ -48,8 +48,15 @@ document.getElementById("btnMyName").addEventListener("click", () =>  switchSket
 document.getElementById("btnNull").addEventListener("click", () =>  switchSketchMap.null())
 
 const dragger = document.querySelector(".dragger")
+const dropLeft = document.querySelector("#drop-left")
+const dropRight = document.querySelector("#drop-right")
+const dropTop = document.querySelector("#drop-top")
+const dropBottom = document.querySelector("#drop-bottom")
+const moveArea = document.querySelector("#move-area")
 const header = document.getElementsByTagName("header")[0]
 dragger.addEventListener("dragstart", (event) => {
+    moveArea.appendChild(header)
+    header.style.position = "fixed";
     event.dataTransfer.setDragImage(new Image(), 0,0)
 })
 dragger.addEventListener("drag", (event) => {
@@ -57,4 +64,32 @@ dragger.addEventListener("drag", (event) => {
         header.style.left = event.clientX - event.target.clientWidth + "px";
         header.style.top = event.clientY - event.target.offsetTop - event.target.clientHeight/2 + "px";
     }
+    dropLeft.style.pointerEvents = "all";
+    dropRight.style.pointerEvents = "all";
+    dropTop.style.pointerEvents = "all";
+    dropBottom.style.pointerEvents = "all";
 })
+dragger.addEventListener("dragend", (event) => {
+    dropLeft.style.pointerEvents = null;
+    dropRight.style.pointerEvents = null;
+    dropTop.style.pointerEvents = null;
+    dropBottom.style.pointerEvents = null;
+})
+function dragAreaDragOver(event) {
+    event.preventDefault();
+}
+function dragAreaDrop(event) {
+    event.preventDefault();
+    console.log(event.dataTransfer)
+    event.target.appendChild(header)
+    header.style.left = null;
+    header.style.top = null;
+}
+dropLeft.addEventListener("dragover", dragAreaDragOver)
+dropLeft.addEventListener("drop", dragAreaDrop)
+dropRight.addEventListener("dragover", dragAreaDragOver)
+dropRight.addEventListener("drop", dragAreaDrop)
+dropTop.addEventListener("dragover", dragAreaDragOver)
+dropTop.addEventListener("drop", dragAreaDrop)
+dropBottom.addEventListener("dragover", dragAreaDragOver)
+dropBottom.addEventListener("drop", dragAreaDrop)

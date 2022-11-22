@@ -7,17 +7,23 @@
         <script defer src="bundle.js"></script>
     </head>
     <body>
-        <header>
-            <span class="dragger" draggable="true" style="cursor:move;">
-                <span></span><span></span>
-            </span>
-            <button id="btnStars" name="btnStars">Stars</button>
-            <button id="btnPendelum" name="btnPendelum">Pendelum</button>
-            <button id="btnRandom" name="btnRandom">Random</button>
-            <button id="btnNoise" name="btnNoise">Noise</button>
-            <button id="btnMyName" name="btnMyName">My Name</button>
-            <button id="btnNull" name="btnNull">Null</button> 
-        </header>
+        <div id="drop-left" dropzone="move"></div>
+        <div id="drop-right" dropzone="move"></div>
+        <div id="drop-top" dropzone="move"></div>
+        <div id="drop-bottom" dropzone="move"></div>
+        <div id="move-area">
+            <header>
+                <span class="dragger" draggable="true" style="cursor:move;">
+                    <span></span><span></span>
+                </span>
+                <button id="btnStars" name="btnStars">Stars</button>
+                <button id="btnPendelum" name="btnPendelum">Pendelum</button>
+                <button id="btnRandom" name="btnRandom">Random</button>
+                <button id="btnNoise" name="btnNoise">Noise</button>
+                <button id="btnMyName" name="btnMyName">My Name</button>
+                <button id="btnNull" name="btnNull">Null</button> 
+            </header>
+        </div>
         <div id="p5"></div>
     </body>
 </html>
